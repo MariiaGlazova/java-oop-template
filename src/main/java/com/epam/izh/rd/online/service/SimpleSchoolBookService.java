@@ -48,6 +48,9 @@ public class SimpleSchoolBookService implements BookService {
     @Override
     public Author findAuthorByBookName(String name) {
         SchoolBook[] schoolBooks = schoolBookBookRepository.findByName(name);
-        return authorService.findByFullName(schoolBooks[0].getAuthorName(), schoolBooks[0].getAuthorLastName());
+        if (schoolBooks.length > 0) {
+            return authorService.findByFullName(schoolBooks[0].getAuthorName(), schoolBooks[0].getAuthorLastName());
+        }
+        return null;
     }
 }
